@@ -267,11 +267,11 @@ def _ecg_quality_zhao2018(
         n_suspicious = len(np.where(class_matrix == 1)[0])
         n_unqualified = len(np.where(class_matrix == 0)[0])
         if n_unqualified >= 2 or (n_unqualified == 1 and n_suspicious == 2):
-            return "Unacceptable"
+            return "Unacceptable",n_unqualified,n_suspicious
         elif n_optimal >= 2 and n_unqualified == 0:
-            return "Excellent"
+            return "Excellent",n_unqualified,n_suspicious
         else:
-            return "Barely acceptable"
+            return "Barely acceptable",n_unqualified,n_suspicious
 
     # Classify indices based on fuzzy comprehensive evaluation
     elif mode == "fuzzy":
@@ -351,13 +351,12 @@ def _ecg_quality_zhao2018(
 
         # classify
         V = np.sum(np.power(S, 2) * [1, 2, 3]) / np.sum(np.power(S, 2))
-
         if V < 1.5:
-            return "Excellent"
+            return "Excellent",V,V
         elif V >= 2.40:
-            return "Unnacceptable"
+            return "Unnacceptable",V,V
         else:
-            return "Barely acceptable"
+            return "Barely acceptable",V,V
 
 
 def _ecg_quality_kSQI(ecg_cleaned, method="fisher"):
