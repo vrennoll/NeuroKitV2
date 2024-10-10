@@ -170,17 +170,25 @@ def _ecg_clean_missing(ecg_signal):
 # =============================================================================
 # NeuroKit
 # =============================================================================
+
 def _ecg_clean_nk(ecg_signal, sampling_rate=1000, **kwargs):
     # Remove slow drift and dc offset with highpass Butterworth.
-    clean = signal_filter(
+    clean1 = signal_filter(
         signal=ecg_signal,
         sampling_rate=sampling_rate,
         lowcut=0.5,
         method="butterworth",
         order=5,
     )
+    clean2 = signal_filter(
+        signal=clean1,
+        sampling_rate=sampling_rate,
+        highcut=150,
+        method="butterworth",
+        order=5,
+    )
 
-    clean = signal_filter(signal=clean, sampling_rate=sampling_rate, method="powerline", **kwargs)
+    clean = signal_filter(signal=clean2, sampling_rate=sampling_rate, method="powerline", powerline=60, **kwargs)
     return clean
 
 
