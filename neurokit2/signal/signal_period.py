@@ -79,8 +79,8 @@ def signal_period(
     """
     peaks = _signal_formatpeaks_sanitize(peaks)
 
-    # Sanity checks.
-    if np.size(peaks) <= 3:
+# Sanity checks.
+    if np.size(peaks) <= 2:
         warn(
             "Too few peaks detected to compute the rate. Returning empty vector.",
             category=NeuroKitWarning,
