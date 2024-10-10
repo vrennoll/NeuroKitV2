@@ -243,7 +243,7 @@ def _ecg_findpeaks_neurokit(
     avgwindow=0.75,
     gradthreshweight=1.5,
     minlenweight=0.4,
-    mindelay=0.3,
+    mindelay=0.2,
     show=False,
 ):
     """All tune-able parameters are specified as keyword arguments.
