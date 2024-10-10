@@ -103,7 +103,7 @@ def hrv(peaks, sampling_rate=1000, show=False, **kwargs):
 
     # Gather indices
     out.append(hrv_time(peaks, sampling_rate=sampling_rate))
-    out.append(hrv_frequency(peaks, sampling_rate=sampling_rate))
+    out.append(hrv_frequency(peaks, sampling_rate=sampling_rate,normalize=False))
     out.append(hrv_nonlinear(peaks, sampling_rate=sampling_rate))
 
     # Compute RSA if rsp data is available
